@@ -116,3 +116,7 @@ combined_df = pols_month_clean %>%
 glimpse(combined_df)
 ```
 
+The combined dataset merges U.S. politics, stock market, and unemployment data. It spans 1947–2015, with 12 variables including party counts in government, presidential affiliation, S&P 500 closing values, unemployment rates, and time (year, month).
+
+## Problem 2. 
+
