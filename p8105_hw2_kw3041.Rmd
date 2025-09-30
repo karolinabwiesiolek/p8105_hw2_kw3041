@@ -57,14 +57,17 @@ select(-prez_dem, -prez_gop, -day)
 
 ## 2nd part of Problem 1 -- snp.csv 
 Step 1. Arrange according to year/month - these are first columns. 
+Step 2. Lubridate package and then used it to oprganized with year and month as the separate wasn't working. 
 
 ```{r}
 snp =
   read_csv("/Users/karolinawiesiolek/Desktop/Data_Science/Homeworks/Homework2/data/snp.csv")
-  snp_clean = snp %>% 
-  separate(date, into = c("month", "day", "year"), sep = "-", convert = TRUE) %>% 
-  mutate(month = month.name[month]) %>% 
+  snp_clean <- snp %>%
+  mutate(date = mdy(date),                
+         year = year(date),
+         month = month(date, label = TRUE, abbr = FALSE)) %>%  
   select(year, month, everything()) %>%
-  arrange(year, match(month, month.name))
+  arrange(year, match(as.character(month), month.name))
 
- ```
+head(snp_clean)
+```
