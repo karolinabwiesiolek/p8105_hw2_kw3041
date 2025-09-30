@@ -10,3 +10,23 @@ Loading the library first:
 library(tidyverse)
 ```
 
+Getting the exact path:
+```{r}
+getwd()
+```
+
+Getting the data frames up on the R:
+```{r}
+pols_month = 
+  read_csv("/Users/karolinawiesiolek/Desktop/Data_Science/Homeworks/Homework2/data/pols-month.csv") 
+
+unemployment = 
+  read_csv("/Users/karolinawiesiolek/Desktop/Data_Science/Homeworks/Homework2/data/unemployment.csv") 
+
+snp = 
+  read_csv("/Users/karolinawiesiolek/Desktop/Data_Science/Homeworks/Homework2/data/snp.csv") 
+
+```
+
+
+
