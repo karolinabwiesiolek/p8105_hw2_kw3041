@@ -118,7 +118,7 @@ glimpse(combined_df)
 
 The combined dataset merges U.S. politics, stock market, and unemployment data. It spans 1947–2015, with 12 variables including party counts in government, presidential affiliation, S&P 500 closing values, unemployment rates, and time (year, month).
 
-## Problem 2. 
+## Problem 2 part 1 with mr. Trash Wheel 
 
 ```{r}
 library(readxl)
@@ -143,3 +143,21 @@ mr_trashwheel <- read_excel(
 ```
 
 
+
+## Problem 2 - part 2 with next data set. 
+
+```{r}
+professor_trashwheel <- read_excel(
+  "/Users/karolinawiesiolek/Desktop/Data_Science/Homeworks/Homework2/data/Trash_Wheel_Collection_Data.xlsx",
+  sheet = "Professor Trash Wheel"
+) %>% 
+  janitor::clean_names() %>% 
+  filter(!is.na(dumpster)) %>%
+  mutate(
+    weight_tons = as.integer(round(weight_tons)),
+    trash_wheel = "Professor Trash Wheel"
+  ) %>% 
+  select(dumpster, month, year, date, weight_tons, volume_cubic_yards,
+         plastic_bottles, polystyrene, cigarette_butts, glass_bottles,
+         plastic_bags, wrappers, homes_powered)
+```
