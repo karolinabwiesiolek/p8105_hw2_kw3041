@@ -28,13 +28,21 @@ snp =
 
 ```
 
-## Working on pols_month, 1st separating year/month/day:
+## Working on pols_month -- first part of Problem 1.
+
+Step 1. Separate by year/month/day.
+Step 2. Replace month number with a month name.
 
 ```{r}
 pols_month =
   read_csv("/Users/karolinawiesiolek/Desktop/Data_Science/Homeworks/Homework2/data/pols-month.csv")
   pols_month_clean = pols_month %>% 
-  separate(mon, into = c("year", "month", "day"), sep = "-", convert = TRUE)
+  separate(mon, into = c("year", "month", "day"), sep = "-", convert = TRUE) %>% 
+  mutate(month = month.name[month])
 ```
+
+
+
+
 
 
