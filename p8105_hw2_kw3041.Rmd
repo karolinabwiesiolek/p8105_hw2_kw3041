@@ -32,14 +32,26 @@ snp =
 
 Step 1. Separate by year/month/day.
 Step 2. Replace month number with a month name.
+Step 3. Create 'president' variable taking values gop and dem. First, I used a second mutate to add new variable but that didn't work so i merged 'mutate'.
+Step 4. Using `select` removed columns. 
 
 ```{r}
 pols_month =
   read_csv("/Users/karolinawiesiolek/Desktop/Data_Science/Homeworks/Homework2/data/pols-month.csv")
   pols_month_clean = pols_month %>% 
   separate(mon, into = c("year", "month", "day"), sep = "-", convert = TRUE) %>% 
-  mutate(month = month.name[month])
+  mutate(
+    month = month.name[month],
+    president = case_when(
+    prez_gop == 1 ~ "gop",
+    prez_dem == 1 ~ "dem"
+  )
+) %>% 
+
+select(-prez_dem, -prez_gop, -day) 
+ 
 ```
+
 
 
 
