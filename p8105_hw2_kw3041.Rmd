@@ -161,3 +161,29 @@ professor_trashwheel <- read_excel(
          plastic_bottles, polystyrene, cigarette_butts, glass_bottles,
          plastic_bags, wrappers, homes_powered)
 ```
+
+
+
+## Problem 2 -- Part 3 
+
+```{r}
+gwynnda = read_excel(
+  "/Users/karolinawiesiolek/Desktop/Data_Science/Homeworks/Homework2/data/Trash_Wheel_Collection_Data.xlsx",
+  sheet = "Gwynns Falls Trash Wheel",
+) %>%
+  janitor::clean_names() %>%
+  filter(!is.na(dumpster)) %>%  
+  mutate(
+    weight_tons = as.integer(round(weight_tons)), 
+    trash_wheel = "Gwynnda" 
+  ) %>%
+  select(dumpster, month, year, date, weight_tons, volume_cubic_yards,
+         plastic_bottles, polystyrene, cigarette_butts,
+         plastic_bags, wrappers, homes_powered)
+
+```
+
+
+
+
+
