@@ -8,6 +8,7 @@ Loading the library first:
 
 ```{r}
 library(tidyverse)
+library(lubridate)
 ```
 
 Getting the exact path:
@@ -54,7 +55,16 @@ select(-prez_dem, -prez_gop, -day)
 
 
 
+## 2nd part of Problem 1 -- snp.csv 
+Step 1. Arrange according to year/month - these are first columns. 
 
+```{r}
+snp =
+  read_csv("/Users/karolinawiesiolek/Desktop/Data_Science/Homeworks/Homework2/data/snp.csv")
+  snp_clean = snp %>% 
+  separate(date, into = c("month", "day", "year"), sep = "-", convert = TRUE) %>% 
+  mutate(month = month.name[month]) %>% 
+  select(year, month, everything()) %>%
+  arrange(year, match(month, month.name))
 
-
-
+ ```
