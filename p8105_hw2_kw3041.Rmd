@@ -105,3 +105,14 @@ head(unemployment_long)
 
 ```
 
+## Part 4 of Problem 1 -- mergning. 
+
+
+```{r}
+combined_df = pols_month_clean %>%
+  left_join(snp_clean, by = c("year", "month")) %>%
+  left_join(unemployment_long, by = c("year", "month"))
+
+glimpse(combined_df)
+```
+
