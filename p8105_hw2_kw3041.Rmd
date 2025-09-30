@@ -120,3 +120,26 @@ The combined dataset merges U.S. politics, stock market, and unemployment data. 
 
 ## Problem 2. 
 
+```{r}
+library(readxl)
+library(dplyr)
+```
+
+
+```{r}
+mr_trashwheel <- read_excel(
+  "/Users/karolinawiesiolek/Desktop/Data_Science/Homeworks/Homework2/data/Trash_Wheel_Collection_Data.xlsx",
+  sheet = "Mr. Trash Wheel"
+) %>% 
+  janitor::clean_names() %>% 
+  filter(!is.na(dumpster)) %>% 
+  mutate(
+    sports_balls = as.integer(round(sports_balls)),
+    trash_wheel = "Mr. Trash Wheel"
+  ) %>% 
+  select(dumpster, month, year, date, weight_tons, volume_cubic_yards,
+         plastic_bottles, polystyrene, cigarette_butts, glass_bottles,
+         plastic_bags, wrappers, sports_balls, homes_powered, trash_wheel)
+```
+
+
