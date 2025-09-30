@@ -28,5 +28,13 @@ snp =
 
 ```
 
+## Working on pols_month, 1st separating year/month/day:
+
+```{r}
+pols_month =
+  read_csv("/Users/karolinawiesiolek/Desktop/Data_Science/Homeworks/Homework2/data/pols-month.csv")
+  pols_month_clean = pols_month %>% 
+  separate(mon, into = c("year", "month", "day"), sep = "-", convert = TRUE)
+```
 
 
