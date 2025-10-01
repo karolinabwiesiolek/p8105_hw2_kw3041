@@ -253,7 +253,11 @@ zori_long = zori %>%
     cols = x2015_01_31:x2024_08_31,
     names_to = "date",
     values_to = "value"
-  
+) %>%
+  mutate(
+    date = str_remove(date, "^x"),              
+    date = as.Date(date, format = "%Y_%m_%d"),
+    zip_code = str_pad(as.character(region_name), 5, pad = "0")
   )
 ```
 
@@ -311,4 +315,73 @@ zori_final = zori_long %>%
 
 ```
 
+What is in crosswalk but not in Zillow:
+```{r}
+zips_missing=  nyc_zip_neighborhood_clean %>%
+  filter(!zip_code %in% zori_final$zip_code)
 
+head(zips_missing %>% select(zip_code, borough, neighborhood), 20)
+
+```
+
+
+```{r}
+
+n_obs = nrow(zori_final)
+n_zip = n_distinct(zori_final$zip_code)
+n_neighborhood <- n_distinct(zori_final$neighborhood, na.rm = TRUE)
+
+cat("Total observations:", n_obs, "\n")
+cat("Unique ZIP codes:", n_zip, "\n")
+cat("Unique neighborhoods:", n_neighborhood, "\n")
+
+
+```
+
+
+Data description: 
+```{r}
+
+n_obs = nrow(zori_final)
+
+
+n_zip = n_distinct(zori_final$zip_code)
+
+
+n_hoods = n_distinct(na.omit(zori_final$neighborhood))
+
+n_obs; n_zip; n_hoods
+
+```
+
+
+Zillow doesn't track these zip codes and it could be because these are businesses, PO boxes... 
+```{r}
+missing_zips = nyc_zip_neighborhood_clean %>%
+  anti_join(zori_final, by = "zip_code")
+
+missing_zips %>% distinct(zip_code, borough, neighborhood)
+
+```
+
+```{r}
+zori_final = zori_final %>%
+  select(
+    zip_code, borough, neighborhood, county,
+    region_id, size_rank, city, state, metro,
+    date, value
+  )
+```
+
+
+
+I cannot do the portion of the assignment regarding COVID data... I will leave the code in -- but it means that I can knit. 
+
+The final tidy dataset merges Zillow rental data with NYC ZIP code–neighborhood crosswalks. It contains:
+total observations
+unique ZIP codes
+unique neighborhoods
+
+Some ZIP codes like 10020, 10045, 10080 appear in the crosswalk but not in Zillow’s dataset. These are for example business districts, PO boxes, or non-residential areas, which explains their absence from rental data.
+
+During the COVID-19 pandemic, rents fell sharply. The table of the top 10 ZIP codes with the largest drops between Jan 2020 and Jan 2021 shows that Manhattan neighborhoods were hit hardest. 
