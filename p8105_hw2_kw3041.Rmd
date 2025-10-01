@@ -281,6 +281,34 @@ nyc_zip_neighborhood_clean = nyc_zip_neighborhood %>%
 ```
 
 
+```{r}
+zori_long = zori_long %>%
+  mutate(
+    zip_code = str_pad(as.character(region_name), 5, "left", "0")
+  )
 
+```
+
+
+Cleaning data:
+```{r}
+nyc_zip_neighborhood_clean = nyc_zip_neighborhood_clean %>%
+  group_by(zip_code) %>%
+  summarise(
+    county = first(na.omit(county)),
+    neighborhood = first(na.omit(neighborhood)),
+    borough = first(na.omit(borough)),
+    .groups = "drop"
+  )
+
+```
+
+Joining data together: 
+
+```{r}
+zori_final = zori_long %>%
+  left_join(nyc_zip_neighborhood_clean, by = "zip_code")
+
+```
 
 
