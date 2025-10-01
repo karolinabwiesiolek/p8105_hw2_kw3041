@@ -236,8 +236,15 @@ total_cigs_gwynnda_june22 = gwynnda %>%
 
 
 ```{r}
-zori <- read_csv("/Users/karolinawiesiolek/Desktop/Data_Science/Homeworks/Homework2/data/Zip_zori_uc_sfrcondomfr_sm_month_NYC.csv") %>% 
+zori = read_csv("/Users/karolinawiesiolek/Desktop/Data_Science/Homeworks/Homework2/data/Zip_zori_uc_sfrcondomfr_sm_month_NYC.csv") %>% 
   janitor::clean_names()
 ```
+
+
+```{r}
+nyc_zip_neighborhood = read_csv("/Users/karolinawiesiolek/Desktop/Data_Science/Homeworks/Homework2/data/Zip Codes.csv") %>%
+  janitor::clean_names()
+```
+
 
 
