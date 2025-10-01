@@ -183,6 +183,24 @@ gwynnda = read_excel(
 
 ```
 
+Combining all the data:
+
+```{r}
+
+mr_trashwheel <- mr_trashwheel %>% mutate(year = as.integer(year))
+professor_trashwheel <- professor_trashwheel %>% mutate(year = as.integer(year))
+gwynnda <- gwynnda %>% mutate(year = as.integer(year))
+
+all_trashwheels <- bind_rows(
+  mr_trashwheel,
+  professor_trashwheel,
+  gwynnda
+)
+
+glimpse(all_trashwheels)
+head(all_trashwheels)
+
+```
 
 
 
