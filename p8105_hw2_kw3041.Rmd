@@ -232,5 +232,12 @@ total_cigs_gwynnda_june22 = gwynnda %>%
 ```
 
 
+## Problem 3. 
+
+
+```{r}
+zori <- read_csv("/Users/karolinawiesiolek/Desktop/Data_Science/Homeworks/Homework2/data/Zip_zori_uc_sfrcondomfr_sm_month_NYC.csv") %>% 
+  janitor::clean_names()
+```
 
 
