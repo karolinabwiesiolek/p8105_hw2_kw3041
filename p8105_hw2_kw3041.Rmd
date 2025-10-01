@@ -76,7 +76,7 @@ head(snp_clean)
 ## Part 3 of Problem 1 -- unemployment data.
 
 ```{r}
-unemployment_long <- unemployment %>% 
+unemployment_long = unemployment %>% 
   pivot_longer(
     cols = -Year,          
     names_to = "month",
@@ -245,6 +245,42 @@ zori = read_csv("/Users/karolinawiesiolek/Desktop/Data_Science/Homeworks/Homewor
 nyc_zip_neighborhood = read_csv("/Users/karolinawiesiolek/Desktop/Data_Science/Homeworks/Homework2/data/Zip Codes.csv") %>%
   janitor::clean_names()
 ```
+
+Tidying data: 
+```{r}
+zori_long = zori %>%
+  pivot_longer(
+    cols = x2015_01_31:x2024_08_31,
+    names_to = "date",
+    values_to = "value"
+  
+  )
+```
+
+```{r}
+names(nyc_zip_neighborhood)
+
+```
+
+
+```{r}
+nyc_zip_neighborhood_clean = nyc_zip_neighborhood %>%
+  mutate(
+    zip_code = str_pad(as.character(zip_code), 5, side = "left", pad = "0"),
+    neighborhood = na_if(neighborhood, "NA"),
+    borough = case_when(
+      county == "New York"  ~ "Manhattan",
+      county == "Kings"     ~ "Brooklyn",
+      county == "Queens"    ~ "Queens",
+      county == "Bronx"     ~ "Bronx",
+      county == "Richmond"  ~ "Staten Island",
+      TRUE ~ NA_character_
+    )
+  )
+
+```
+
+
 
 
 
